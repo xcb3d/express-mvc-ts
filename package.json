@@ -4,7 +4,7 @@
   "description": "Express.js MVC project with TypeScript and mock data",
   "main": "dist/server.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && tsc-alias",
     "start": "node dist/server.js",
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only src/server.ts",
     "watch": "tsc --watch",
@@ -32,6 +32,7 @@
     "@types/node": "^20.4.5",
     "rimraf": "^5.0.1",
     "ts-node-dev": "^2.0.0",
+    "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6"
   }
