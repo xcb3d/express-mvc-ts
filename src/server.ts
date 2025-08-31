@@ -22,7 +22,7 @@ app.use('/api', routes);
 
 // Basic Route for Health Check
 app.get('/', (req: Request, res: Response) => {
-  res.status(200).json({ message: 'Server is running!' });
+  res.status(200).json({ message: 'Server is running! EC2' });
 });
 
 // Error Handling Middleware
