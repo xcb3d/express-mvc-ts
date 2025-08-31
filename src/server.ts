@@ -21,12 +21,12 @@ app.use(morgan('dev'));
 app.use('/api', routes);
 
 // Basic Route for Health Check
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (_req: Request, res: Response) => {
   res.status(200).json({ message: 'Server is running! EC2' });
 });
 
 // Error Handling Middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
 });
@@ -36,4 +36,3 @@ app.listen(port, () => {
 });
 
 export default app;
-
