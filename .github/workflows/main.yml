@@ -1,0 +1,37 @@
+name: Deploy Express MVC TS to EC2
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            cd /home/ubuntu/express-mvc-ts
+            git reset --hard
+            git pull origin main
+
+            # Cài dependencies
+            npm install
+
+            # Build TypeScript -> dist
+            npm run build
+
+            # Restart bằng PM2 (giả sử file start là dist/index.js)
+            pm2 delete express-mvc-ts || true
+            pm2 start dist/index.js --name express-mvc-ts
+          EOF
