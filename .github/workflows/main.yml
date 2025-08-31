@@ -33,5 +33,5 @@ jobs:
 
             # Restart bằng PM2 (giả sử file start là dist/index.js)
             pm2 delete express-mvc-ts || true
-            pm2 start dist/index.js --name express-mvc-ts
+            pm2 start dist/server.js --name express-mvc-ts
           EOF
